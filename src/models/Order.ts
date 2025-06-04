@@ -14,8 +14,7 @@ import {
 import User from './User'
 import Item from './Item'
 import OrderItem from './OrderItem'
-
-export type OrderStatus = 'pending' | 'completed' | 'expired'
+import { OrderStatus } from '../constants/OrderStatus'
 
 @Table({
   tableName: 'orders',
@@ -28,9 +27,9 @@ export default class Order extends Model {
   @Column(DataType.INTEGER)
   id!: number
 
-  @Default('pending')
+  @Default(OrderStatus.PENDING)
   @Column({
-    type: DataType.ENUM('pending', 'completed', 'expired'),
+    type: DataType.ENUM(...Object.values(OrderStatus)),
     allowNull: false,
   })
   status!: OrderStatus
