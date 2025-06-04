@@ -187,7 +187,12 @@
 - [x] Health check endpoints
 - [x] Utility functions (API responses, error handling)
 - [x] Project structure organization
-- [x] Logging system setup
+- [x] Logging system setup with winston
+- [x] User Auth controller
+- [x] User Service
+- [x] Constants enum values to be shared across the project
+- [x] Implemented DI using inversify
+- [x] Centralize Validation with Zod package
 
 ### Bonus Features
 
