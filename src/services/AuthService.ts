@@ -105,7 +105,7 @@ export class AuthService implements IAuthService {
 
     const role = (await Role.findByPk(user.role_id))?.name || 'Unknown'
 
-    const token = signToken({ userId: user.id.toString(), role })
+    const token = signToken({ id: user.id, email: user.email, role })
     return token
   }
 
