@@ -106,16 +106,16 @@
 
 #### 2. Order Management
 
-- [ ] **Cashier Order Operations**
-  - [ ] Add/remove non-expired items to orders
-  - [ ] Set item quantities
-  - [ ] Mark orders as complete
-  - [ ] Assign orders to specific waiters
+- [x] **Cashier Order Operations**
+  - [x] Add/remove non-expired items to orders
+  - [x] Set item quantities
+  - [x] Mark orders as complete
+  - [x] Assign orders to specific waiters
 - [ ] **Admin/Manager Order Oversight**
-  - [ ] View and manage all orders
-  - [ ] Access order details and status
-- [ ] **Order Processing Features**
-  - [ ] Calculate total cost for multiple items with quantities
+  - [x] View and manage all orders
+  - [x] Access order details and status
+- [x] **Order Processing Features**
+  - [x] Calculate total cost for multiple items with quantities
   - [ ] Auto-expire orders after 4 hours if still pending
 
 #### 3. User Authentication & Authorization
