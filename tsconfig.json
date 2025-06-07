@@ -4,14 +4,17 @@
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
 }

@@ -1,17 +1,19 @@
 import 'reflect-metadata'
 import express, { Application, Request, Response } from 'express'
-import dotenv from 'dotenv'
 import { connectDB } from './config/database'
-import authRoutes from './routes/authRoutes'
+import { createRoutes } from './routes'
 import { errorHandler } from './utils/errorHandler'
 import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './docs/swagger'
-dotenv.config()
+import { config } from './config/config'
+import { setupContainer } from './config/container'
 
 const app: Application = express()
-const PORT = process.env.PORT || 3000
+const PORT = config.port
 
 app.use(express.json())
+
+const container = setupContainer()
 
 app.use(
   '/api-docs',
@@ -33,7 +35,7 @@ app.get('/', (_req: Request, res: Response) => {
   res.json({ message: '🎉 API is up and running' })
 })
 
-app.use('/api/auth', authRoutes)
+app.use('/api/v1', createRoutes(container))
 app.use(errorHandler)
 ;(async () => {
   await connectDB()
