@@ -1,10 +1,6 @@
 import jwt, { SignOptions } from 'jsonwebtoken'
 import { config } from '../config/config'
-
-export interface JWTPayload {
-  userId: string
-  role: string
-}
+import { JWTPayload } from '../middleware/authMiddleware'
 
 export function signToken(payload: JWTPayload): string {
   const options: SignOptions = {
@@ -17,8 +13,11 @@ export function verifyToken(token: string): JWTPayload {
   try {
     const decoded = jwt.verify(token, config.jwt.secret) as jwt.JwtPayload
     return {
-      userId: decoded.userId as string,
-      role: decoded.role as string,
+      id: decoded.id,
+      email: decoded.email,
+      role: decoded.role,
+      iat: decoded.iat,
+      exp: decoded.exp,
     }
   } catch (error) {
     throw new Error('Invalid or expired token')
