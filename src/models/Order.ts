@@ -14,7 +14,7 @@ import {
 import User from './User'
 import Item from './Item'
 import OrderItem from './OrderItem'
-import { OrderStatus } from '../constants/OrderStatus'
+import { OrderStatus } from '../enums/OrderStatus'
 
 @Table({
   tableName: 'orders',

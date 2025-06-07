@@ -8,6 +8,7 @@ import {
   BelongsToMany,
   PrimaryKey,
   AutoIncrement,
+  Default,
 } from 'sequelize-typescript'
 import Category from './Category'
 import Order from './Order'
@@ -54,6 +55,13 @@ export default class Item extends Model {
     defaultValue: 0,
   })
   stock_qty!: number
+
+  @Default(true)
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+  })
+  is_active!: boolean
 
   @ForeignKey(() => Category)
   @Column({
