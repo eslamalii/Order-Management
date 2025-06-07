@@ -57,20 +57,7 @@
 
 3. **Environment Configuration**
 
-   Create a `.env` file in the root directory:
-
-   ```env
-   NODE_ENV=development
-   PORT=3000
-
-   # PostgreSQL Database Configuration
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_NAME=order_management_db
-   DB_USER=your_db_user
-   DB_PASSWORD=your_db_password
-   DB_SCHEMA=public
-   ```
+   Create a `.env` file in the root directory and copy the the values from `.env.example`
 
 4. **Database Setup**
 
@@ -105,13 +92,13 @@
 
 #### 1. Item/Inventory Management
 
-- [ ] **CRUD Operations for Items**
-  - [ ] Super Admin/Managers: Full CRUD on items (name, description, price, category, expiry date, stock quantity)
-  - [ ] Waiters: View-only access to non-expired items
-- [ ] **Filtering & Sorting System**
-  - [ ] Filter by category (others, food, beverages)
-  - [ ] Sort by name, price, expiry date, total stock value (price × quantity)
-  - [ ] Support ascending/descending order for numeric and date fields
+- [x] **CRUD Operations for Items**
+  - [x] Super Admin/Managers: Full CRUD on items (name, description, price, category, expiry date, stock quantity)
+  - [x] Waiters: View-only access to non-expired items
+- [x] **Filtering & Sorting System**
+  - [x] Filter by category (others, food, beverages)
+  - [x] Sort by name, price, expiry date, total stock value (price × quantity)
+  - [x] Support ascending/descending order for numeric and date fields
 - [ ] **Inventory Rules & Notifications**
   - [ ] Prevent expired/unavailable items from being added to orders
   - [ ] Email notifications to admins/managers 5 days before expiry
