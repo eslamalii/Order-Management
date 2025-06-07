@@ -58,7 +58,7 @@ export async function connectDB(): Promise<void> {
   try {
     await sequelize.authenticate()
     console.log('✅ Database connection established.')
-    await sequelize.sync()
+    await sequelize.sync({ alter: true })
     console.log('✅ Models synchronized with the database.')
   } catch (err) {
     console.error('❌ Unable to connect to the database:', err)
