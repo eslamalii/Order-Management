@@ -59,7 +59,7 @@ export class CommissionController {
             endDate: params.endDate,
           },
           filters: {
-            waiterId: params.waiterId,
+            waiterName: params.waiterName,
           },
         },
         'Commission Report generated successfully'

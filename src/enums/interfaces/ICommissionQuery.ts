@@ -3,7 +3,7 @@ import { ExportFormat } from '../ExportFormat'
 export interface ICommissionQuery {
   startDate?: Date
   endDate?: Date
-  waiterId?: number
+  waiterName?: string
   export?: boolean
   format?: ExportFormat
 }

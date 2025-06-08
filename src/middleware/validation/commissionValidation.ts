@@ -1,15 +1,10 @@
 import { z } from 'zod'
 
-const positiveInt = z.coerce
-  .number({ invalid_type_error: 'Must be a number or numeric string' })
-  .int({ message: 'Must be an integer' })
-  .positive({ message: 'Must be a positive integer' })
-
 export const commissionReportSchema = z
   .object({
     startDate: z.string().datetime('Start date must be a valid date and time'),
     endDate: z.string().datetime('End date must be a valid date and time'),
-    waiterId: positiveInt.optional(),
+    waiterName: z.string().optional(),
     export: z
       .string()
       .optional()

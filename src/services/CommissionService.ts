@@ -13,7 +13,7 @@ export class CommissionService implements ICommissionService {
     userRole: UserRole,
     userId: number
   ): Promise<IWaiterCommissionReport[]> {
-    const { startDate, endDate, waiterId } = query
+    const { startDate, endDate, waiterName } = query
 
     let sqlQuery = `
       SELECT 
@@ -54,9 +54,9 @@ export class CommissionService implements ICommissionService {
       waiterRole: UserRole.WAITER,
     }
 
-    if (waiterId) {
-      sqlQuery += ` AND u.id = :waiterId`
-      replacements.waiterId = waiterId
+    if (waiterName) {
+      sqlQuery += ` AND u.name LIKE :waiterName`
+      replacements.waiterId = `%${waiterName}%`
     }
 
     // Add role-based filtering
