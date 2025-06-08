@@ -4,14 +4,9 @@ import { IOrderRepository } from '../repositories/Interfaces/IOrderRepository'
 import { IItemService } from './Interfaces/IItemService'
 import { Order, OrderItem, User } from '../models'
 import { OrderStatus } from '../enums/OrderStatus'
-import { UserRole } from '../enums/UserRole'
 import { QueryBuilder } from '../utils/QueryBuilder'
 import { IOrderService } from './Interfaces/IOrderService'
-import {
-  NotFoundError,
-  AuthorizationError,
-  BadRequestError,
-} from '../utils/errors'
+import { NotFoundError, BadRequestError } from '../utils/errors'
 import { OrderQuery } from '../enums/interfaces/IOrderQuery'
 
 @injectable()
@@ -95,33 +90,11 @@ export class OrderService implements IOrderService {
     return (await this.orderRepo.findById(order.id)) as Order
   }
 
-  async getOrderById(
-    id: number,
-    userRole: UserRole,
-    userId: number
-  ): Promise<Order | null> {
-    const order = await this.orderRepo.findById(id)
-
-    if (!order) {
-      return null
-    }
-
-    if (userRole === UserRole.WAITER && order.waiter_id !== userId) {
-      throw new AuthorizationError('You can only view your own orders')
-    }
-
-    if (userRole === UserRole.CASHIER && order.cashier_id !== userId) {
-      throw new AuthorizationError('You can only view orders you created')
-    }
-
-    return order
+  async getOrderById(id: number): Promise<Order | null> {
+    return await this.orderRepo.findById(id)
   }
 
-  async getAllOrders(
-    queryParams: OrderQuery,
-    userRole: UserRole,
-    userId: number
-  ): Promise<{
+  async getAllOrders(queryParams: OrderQuery): Promise<{
     orders: Order[]
     total: number
     page: number
@@ -142,15 +115,8 @@ export class OrderService implements IOrderService {
 
     const filters: any = {}
 
-    if (userRole === UserRole.WAITER) {
-      filters.waiter_id = userId
-    } else if (userRole === UserRole.CASHIER) {
-      filters.cashier_id = userId
-    } else {
-      if (cashier_id) filters.cashier_id = cashier_id
-      if (waiter_id) filters.waiter_id = waiter_id
-    }
-
+    if (cashier_id) filters.cashier_id = cashier_id
+    if (waiter_id) filters.waiter_id = waiter_id
     if (status) filters.status = status
     if (startDate) filters.startDate = new Date(startDate)
     if (endDate) filters.endDate = new Date(endDate)
@@ -170,24 +136,11 @@ export class OrderService implements IOrderService {
     }
   }
 
-  async updateOrder(
-    id: number,
-    data: Partial<Order>,
-    userRole: UserRole,
-    userId: number
-  ): Promise<Order> {
+  async updateOrder(id: number, data: Partial<Order>): Promise<Order> {
     const order = await this.orderRepo.findById(id)
 
     if (!order) {
       throw new NotFoundError('Order not found')
-    }
-
-    if (userRole === UserRole.WAITER) {
-      throw new AuthorizationError('Waiters cannot update orders')
-    }
-
-    if (userRole === UserRole.CASHIER && order.cashier_id !== userId) {
-      throw new AuthorizationError('You can only update orders you created')
     }
 
     if (order.status === OrderStatus.COMPLETED) {
@@ -197,23 +150,11 @@ export class OrderService implements IOrderService {
     return await this.orderRepo.update(id, data)
   }
 
-  async deleteOrder(
-    id: number,
-    userRole: UserRole,
-    userId: number
-  ): Promise<void> {
+  async deleteOrder(id: number): Promise<void> {
     const order = await this.orderRepo.findById(id)
 
     if (!order) {
       throw new NotFoundError('Order not found')
-    }
-
-    if (userRole === UserRole.WAITER) {
-      throw new AuthorizationError('Waiters cannot delete orders')
-    }
-
-    if (userRole === UserRole.CASHIER && order.cashier_id !== userId) {
-      throw new AuthorizationError('You can only delete orders you created')
     }
 
     if (order.status !== OrderStatus.PENDING) {
@@ -315,23 +256,11 @@ export class OrderService implements IOrderService {
     return (await this.orderRepo.findById(orderId)) as Order
   }
 
-  async completeOrder(
-    id: number,
-    userRole: UserRole,
-    userId: number
-  ): Promise<Order> {
+  async completeOrder(id: number): Promise<Order> {
     const order = await this.orderRepo.findById(id)
 
     if (!order) {
       throw new NotFoundError('Order not found')
-    }
-
-    if (userRole === UserRole.WAITER) {
-      throw new AuthorizationError('Waiters cannot complete orders')
-    }
-
-    if (userRole === UserRole.CASHIER && order.cashier_id !== userId) {
-      throw new AuthorizationError('You can only complete orders you created')
     }
 
     if (order.status !== OrderStatus.PENDING) {

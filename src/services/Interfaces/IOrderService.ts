@@ -8,28 +8,15 @@ export interface IOrderService {
     waiter_id?: number
     items: Array<{ item_id: number; quantity: number }>
   }): Promise<Order>
-  getOrderById(
-    id: number,
-    userRole: UserRole,
-    userId: number
-  ): Promise<Order | null>
-  getAllOrders(
-    queryParams: OrderQuery,
-    userRole: UserRole,
-    userId: number
-  ): Promise<{
+  getOrderById(id: number): Promise<Order | null>
+  getAllOrders(queryParams: OrderQuery): Promise<{
     orders: Order[]
     total: number
     page: number
     limit: number
     totalPages: number
   }>
-  updateOrder(
-    id: number,
-    data: Partial<Order>,
-    userRole: UserRole,
-    userId: number
-  ): Promise<Order>
+  updateOrder(id: number, data: Partial<Order>): Promise<Order>
   deleteOrder(id: number, userRole: UserRole, userId: number): Promise<void>
   addItemToOrder(
     orderId: number,

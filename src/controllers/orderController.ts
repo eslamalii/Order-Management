@@ -4,6 +4,7 @@ import { TYPES } from '../config/types'
 import { IOrderService } from '../services/Interfaces/IOrderService'
 import { asyncHandler } from '../utils/errorHandler'
 import { ApiResponseHandler } from '../utils/apiResponse'
+import { UserRole } from '../enums/UserRole'
 
 @injectable()
 export class OrderController {
@@ -32,11 +33,12 @@ export class OrderController {
     const queryParams = req.query
     const { role, id: userId } = res.locals.user
 
-    const result = await this.orderService.getAllOrders(
-      queryParams,
-      role,
-      userId
-    )
+    const filters = { ...queryParams }
+    if (role === UserRole.WAITER) {
+      filters.waiter_id = userId
+    }
+
+    const result = await this.orderService.getAllOrders(filters)
 
     return ApiResponseHandler.success(
       res,
@@ -47,9 +49,8 @@ export class OrderController {
 
   getOrderById = asyncHandler(async (req: Request, res: Response) => {
     const { id } = res.locals.validatedData
-    const { role, id: userId } = res.locals.user
 
-    const order = await this.orderService.getOrderById(id, role, userId)
+    const order = await this.orderService.getOrderById(id)
 
     if (!order) {
       return ApiResponseHandler.notFound(res, 'Order not found')
@@ -68,12 +69,7 @@ export class OrderController {
     const updateData = validatedData.body
     const { role, id: userId } = res.locals.user
 
-    const order = await this.orderService.updateOrder(
-      id,
-      updateData,
-      role,
-      userId
-    )
+    const order = await this.orderService.updateOrder(id, updateData)
 
     return ApiResponseHandler.success(res, order, 'Order updated successfully')
   })
