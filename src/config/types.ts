@@ -9,4 +9,6 @@ export const TYPES = {
   OrderRepository: Symbol.for('OrderRepository'),
   OrderService: Symbol.for('OrderService'),
   OrderController: Symbol.for('OrderController'),
+  CommissionService: Symbol.for('CommissionService'),
+  CommissionController: Symbol.for('CommissionController'),
 }

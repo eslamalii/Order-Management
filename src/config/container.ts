@@ -15,6 +15,9 @@ import { OrderRepository } from '../repositories/OrderRepository'
 import { IOrderService } from '../services/Interfaces/IOrderService'
 import { OrderService } from '../services/OrderService'
 import { OrderController } from '../controllers/orderController'
+import { ICommissionService } from '../services/Interfaces/ICommissionService'
+import { CommissionService } from '../services/CommissionService'
+import { CommissionController } from '../controllers/commissionController'
 
 export const setupContainer = () => {
   const container = new Container()
@@ -29,11 +32,17 @@ export const setupContainer = () => {
   container.bind<IAuthService>(TYPES.AuthService).to(AuthService)
   container.bind<IItemService>(TYPES.ItemService).to(ItemService)
   container.bind<IOrderService>(TYPES.OrderService).to(OrderService)
+  container
+    .bind<ICommissionService>(TYPES.CommissionService)
+    .to(CommissionService)
 
   // Controllers
   container.bind<AuthController>(TYPES.AuthController).to(AuthController)
   container.bind<ItemController>(TYPES.ItemController).to(ItemController)
   container.bind<OrderController>(TYPES.OrderController).to(OrderController)
+  container
+    .bind<CommissionController>(TYPES.CommissionController)
+    .to(CommissionController)
 
   return container
 }
