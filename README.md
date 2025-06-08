@@ -120,41 +120,41 @@
 
 #### 3. User Authentication & Authorization
 
-- [ ] **Role-Based Access Control**
-  - [ ] Super Admin: Full system access
-  - [ ] Managers: Full functional access
-  - [ ] Cashiers: Order management + limited access
-  - [ ] Waiters: View-only + personal data access
+- [x] **Role-Based Access Control**
+  - [x] Super Admin: Full system access
+  - [x] Managers: Full functional access
+  - [x] Cashiers: Order management + limited access
+  - [x] Waiters: View-only + personal data access
 - [ ] **Authentication Features**
-  - [ ] JWT-based authentication
+  - [x] JWT-based authentication
   - [ ] Email verification for new user registrations
-  - [ ] Password reset functionality
-  - [ ] Admin/Manager user management (add cashiers/waiters)
+  - [x] Password reset functionality
+  - [x] Admin/Manager user management (add cashiers/waiters)
 
 #### 4. Waiter Commission Report API
 
-- [ ] **Report Endpoint Features**
-  - [ ] Accept date range parameters (startDate, endDate)
-  - [ ] Optional waiter name filtering (partial match)
-  - [ ] JSON response by default
-  - [ ] CSV export option (export=true, format=csv)
-- [ ] **Access Control**
-  - [ ] Super Admins/Managers/Cashiers: View all data
-  - [ ] Waiters: View only their own data
-- [ ] **Raw SQL Aggregation**
-  - [ ] Total items sold per waiter
-  - [ ] Items per category breakdown
-  - [ ] Revenue calculations
-  - [ ] Commission calculations (Others: 0.25%, Food: 1%, Beverages: 0.5%)
+- [x] **Report Endpoint Features**
+  - [x] Accept date range parameters (startDate, endDate)
+  - [x] Optional waiter name filtering (partial match)
+  - [x] JSON response by default
+  - [x] CSV export option (export=true, format=csv)
+- [x] **Access Control**
+  - [x] Super Admins/Managers/Cashiers: View all data
+  - [x] Waiters: View only their own data
+- [x] **Raw SQL Aggregation**
+  - [x] Total items sold per waiter
+  - [x] Items per category breakdown
+  - [x] Revenue calculations
+  - [x] Commission calculations (Others: 0.25%, Food: 1%, Beverages: 0.5%)
 
 #### 5. CSV Import/Export for Items
 
-- [ ] **CSV Operations**
-  - [ ] Import item data with all details and stock levels
-  - [ ] Export complete item inventory
-  - [ ] Support creating new items via import
-  - [ ] Update existing items based on unique identifier
-- [ ] **Admin/Manager Access Only**
+- [x] **CSV Operations**
+  - [x] Import item data with all details and stock levels
+  - [x] Export complete item inventory
+  - [x] Support creating new items via import
+  - [x] Update existing items based on unique identifier
+- [x] **Admin/Manager Access Only**
 
 ### Completed Features
 
