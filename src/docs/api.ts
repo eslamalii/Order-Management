@@ -467,25 +467,6 @@
 
 /**
  * @swagger
- * /:
- *   get:
- *     summary: Health check
- *     tags: [Health]
- *     responses:
- *       200:
- *         description: API is running
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   example: "🎉 API is up and running"
- */
-
-/**
- * @swagger
  * tags:
  *   name: Items
  *   description: Item management
