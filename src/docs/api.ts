@@ -120,8 +120,6 @@
  *           description: Quantity of the item to add.
  *           example: 1
  *
- *     OrderResponse:
- *       $ref: '#/components/schemas/Order'
  *
  *     OrdersResponse:
  *       type: object
@@ -218,8 +216,6 @@
  *           type: boolean
  *           example: false
  *
- *     ItemResponse:
- *       $ref: '#/components/schemas/Item'
  *
  *     ItemsResponse:
  *       type: object
