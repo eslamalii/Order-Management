@@ -4,9 +4,10 @@ import { TYPES } from '../config/types'
 import { IEmailService } from './Interfaces/IEmailService'
 import { IOrderService } from './Interfaces/IOrderService'
 import { IItemService } from './Interfaces/IItemService'
+import { ICronService } from './Interfaces/ICronService'
 
 @injectable()
-export class CronService {
+export class CronService implements ICronService {
   constructor(
     @inject(TYPES.EmailService) private emailService: IEmailService,
     @inject(TYPES.OrderService) private orderService: IOrderService,

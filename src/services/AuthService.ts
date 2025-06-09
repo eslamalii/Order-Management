@@ -1,6 +1,7 @@
 import { inject, injectable } from 'inversify'
 import { TYPES } from '../config/types'
 import { IUserRepository } from '../repositories/Interfaces/IUserRepository'
+import { IEmailService } from './Interfaces/IEmailService'
 import { comparePassword, hashPassword } from '../utils/bycrpt'
 import {
   EmailVerificationToken,
@@ -16,7 +17,8 @@ import { IAuthService } from './Interfaces/IAuthService'
 @injectable()
 export class AuthService implements IAuthService {
   constructor(
-    @inject(TYPES.UserRepository) private readonly userRepo: IUserRepository
+    @inject(TYPES.UserRepository) private readonly userRepo: IUserRepository,
+    @inject(TYPES.EmailService) private readonly emailService: IEmailService
   ) {}
 
   async registerUser(data: {
@@ -46,11 +48,11 @@ export class AuthService implements IAuthService {
       roleId,
     })
 
-    // Will be change to actual email service later
+    // Generate email verification token
     const emailToken = crypto.randomBytes(32).toString('hex')
     const expiresAt = new Date()
     expiresAt.setHours(
-      expiresAt.getHours() + config.tokens.passwordResetExpirationHours
+      expiresAt.getHours() + config.tokens.emailTokenExpirationHours
     )
 
     await EmailVerificationToken.create({
@@ -58,6 +60,8 @@ export class AuthService implements IAuthService {
       token: emailToken,
       expires_at: expiresAt,
     })
+
+    await this.emailService.sendEmailVerification(email, emailToken)
 
     return { user, emailToken, emailTokenExpires: expiresAt }
   }

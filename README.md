@@ -99,10 +99,10 @@
   - [x] Filter by category (others, food, beverages)
   - [x] Sort by name, price, expiry date, total stock value (price × quantity)
   - [x] Support ascending/descending order for numeric and date fields
-- [ ] **Inventory Rules & Notifications**
-  - [ ] Prevent expired/unavailable items from being added to orders
-  - [ ] Email notifications to admins/managers 5 days before expiry
-  - [ ] Email notifications on expiry date with quantity/details
+- [x] **Inventory Rules & Notifications**
+  - [x] Prevent expired/unavailable items from being added to orders
+  - [x] Email notifications to admins/managers 5 days before expiry
+  - [x] Email notifications on expiry date with quantity/details
 
 #### 2. Order Management
 
@@ -111,12 +111,12 @@
   - [x] Set item quantities
   - [x] Mark orders as complete
   - [x] Assign orders to specific waiters
-- [ ] **Admin/Manager Order Oversight**
+- [x] **Admin/Manager Order Oversight**
   - [x] View and manage all orders
   - [x] Access order details and status
 - [x] **Order Processing Features**
   - [x] Calculate total cost for multiple items with quantities
-  - [ ] Auto-expire orders after 4 hours if still pending
+  - [x] Auto-expire orders after 4 hours if still pending
 
 #### 3. User Authentication & Authorization
 
@@ -125,9 +125,9 @@
   - [x] Managers: Full functional access
   - [x] Cashiers: Order management + limited access
   - [x] Waiters: View-only + personal data access
-- [ ] **Authentication Features**
+- [x] **Authentication Features**
   - [x] JWT-based authentication
-  - [ ] Email verification for new user registrations
+  - [x] Email verification for new user registrations
   - [x] Password reset functionality
   - [x] Admin/Manager user management (add cashiers/waiters)
 

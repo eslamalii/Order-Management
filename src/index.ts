@@ -7,8 +7,8 @@ import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './docs/swagger'
 import { config } from './config/config'
 import { setupContainer } from './config/container'
-import { CronService } from './services/cronService'
 import { TYPES } from './config/types'
+import { ICronService } from './services/Interfaces/ICronService'
 
 const app: Application = express()
 const PORT = config.port
@@ -44,7 +44,7 @@ app.use(errorHandler)
     await connectDB()
 
     // Initialize cron jobs after database connection
-    const cronService = container.get<CronService>(TYPES.CronService)
+    const cronService = container.get<ICronService>(TYPES.CronService)
     cronService.init()
     console.log('✅ Cron jobs initialized')
 

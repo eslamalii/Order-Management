@@ -20,9 +20,10 @@ import { CommissionService } from '../services/CommissionService'
 import { CommissionController } from '../controllers/commissionController'
 import { IUserService } from '../services/Interfaces/IUserService'
 import { IEmailService } from '../services/Interfaces/IEmailService'
-import { CronService } from '../services/cronService'
 import { UserService } from '../services/userService'
 import { EmailService } from '../services/emailService'
+import { ICronService } from '../services/Interfaces/ICronService'
+import { CronService } from '../services/cronService'
 
 export const setupContainer = () => {
   const container = new Container()
@@ -41,7 +42,7 @@ export const setupContainer = () => {
     .bind<ICommissionService>(TYPES.CommissionService)
     .to(CommissionService)
   container.bind<IEmailService>(TYPES.EmailService).to(EmailService)
-  container.bind<CronService>(TYPES.CronService).to(CronService)
+  container.bind<ICronService>(TYPES.CronService).to(CronService)
 
   // Controllers
   container.bind<AuthController>(TYPES.AuthController).to(AuthController)

@@ -10,4 +10,5 @@ export interface IUserRepository {
     roleId: number
   }): Promise<User>
   save(user: User): Promise<User>
+  findAdminsAndManagers(): Promise<User[]>
 }

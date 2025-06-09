@@ -1,6 +1,8 @@
 import { injectable } from 'inversify'
 import { Role, User } from '../models'
 import { IUserRepository } from './Interfaces/IUserRepository'
+import { Op } from 'sequelize'
+import { UserRole } from '@/enums/UserRole'
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -30,5 +32,21 @@ export class UserRepository implements IUserRepository {
 
   async save(user: User): Promise<User> {
     return user.save()
+  }
+
+  async findAdminsAndManagers(): Promise<User[]> {
+    return User.findAll({
+      include: [
+        {
+          model: Role,
+          where: {
+            name: {
+              [Op.in]: [UserRole.MANAGER, UserRole.SUPER_ADMIN],
+            },
+          },
+        },
+      ],
+      attributes: ['id', 'email', 'name'],
+    })
   }
 }
