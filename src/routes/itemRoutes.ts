@@ -24,36 +24,42 @@ export const itemContainer = (container: Container) => {
   const itemController = container.get<ItemController>(TYPES.ItemController)
 
   router.use(isAuthenticated)
+
   router.post(
     '/',
     requireAdmin,
     validateZodRequest(createItemSchema, 'body'),
     itemController.createItem
   )
+
   router.get(
     '/',
     requireAll,
     validateZodRequest(getAllItemsSchema, 'query'),
     itemController.getAllItems
   )
+
   router.get(
     '/:id',
     requireStaff,
     validateZodRequest(ItemIdSchema, 'params'),
     itemController.getItemById
   )
+
   router.put(
     '/:id',
     requireAdmin,
     validateCombinedRequest(updateItemSchema),
     itemController.updateItem
   )
+
   router.delete(
     '/:id',
     requireAdmin,
     validateZodRequest(ItemIdSchema, 'params'),
     itemController.deleteItem
   )
+
   router.get(
     '/:id/availability',
     requireStaff,
