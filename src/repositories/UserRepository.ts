@@ -2,7 +2,7 @@ import { injectable } from 'inversify'
 import { Role, User } from '../models'
 import { IUserRepository } from './Interfaces/IUserRepository'
 import { Op } from 'sequelize'
-import { UserRole } from '@/enums/UserRole'
+import { UserRole } from '../enums/UserRole'
 
 @injectable()
 export class UserRepository implements IUserRepository {
