@@ -27,4 +27,6 @@ export interface IOrderService {
   completeOrder(id: number, userRole: UserRole, userId: number): Promise<Order>
   assignWaiterToOrder(orderId: number, waiterId: number): Promise<Order>
   updateExpiredOrders(): Promise<number>
+  getOrdersOlderThan(date: Date, status: string): Promise<any[]>
+  updateOrderStatus(orderId: string, status: string): Promise<void>
 }

@@ -1,4 +1,4 @@
-import { IWaiterCommissionReport } from '../enums/interfaces/IWaiterCommissionReport'
+import { IWaiterCommissionReport } from '../../enums/interfaces/IWaiterCommissionReport'
 import { UserRole } from '../../enums/UserRole'
 import { ICommissionQuery } from '../../enums/interfaces/ICommissionQuery'
 

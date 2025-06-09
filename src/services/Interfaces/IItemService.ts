@@ -20,4 +20,5 @@ export interface IItemService {
   deductStock(id: number, quantity: number): Promise<void>
   findAvailableItems(): Promise<Item[]>
   findExpiringItems(days: number): Promise<Item[]>
+  getItemsExpiringOn(date: Date): Promise<any[]>
 }

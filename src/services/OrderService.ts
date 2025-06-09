@@ -8,6 +8,7 @@ import { QueryBuilder } from '../utils/QueryBuilder'
 import { IOrderService } from './Interfaces/IOrderService'
 import { NotFoundError, BadRequestError } from '../utils/errors'
 import { OrderQuery } from '../enums/interfaces/IOrderQuery'
+import { Op } from 'sequelize'
 
 @injectable()
 export class OrderService implements IOrderService {
@@ -287,5 +288,20 @@ export class OrderService implements IOrderService {
 
   async updateExpiredOrders(): Promise<number> {
     return await this.orderRepo.updateExpiredOrders()
+  }
+
+  async getOrdersOlderThan(date: Date, status: string): Promise<any[]> {
+    return await Order.findAll({
+      where: {
+        createdAt: {
+          [Op.lt]: date,
+        },
+        status: status,
+      },
+    })
+  }
+
+  async updateOrderStatus(orderId: string, status: string): Promise<void> {
+    await Order.update({ status }, { where: { id: orderId } })
   }
 }

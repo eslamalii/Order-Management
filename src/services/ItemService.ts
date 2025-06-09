@@ -5,6 +5,7 @@ import { IItemRepository } from '../repositories/Interfaces/IItemRepository'
 import { Category, Item } from '../models'
 import { AppError } from '../utils/errors'
 import { UserRole } from '../enums/UserRole'
+import { Op } from 'sequelize'
 
 @injectable()
 export class ItemService implements IItemService {
@@ -111,6 +112,22 @@ export class ItemService implements IItemService {
 
   async findExpiringItems(days: number): Promise<Item[]> {
     return await this.itemRepo.findExpiringItems(days)
+  }
+
+  async getItemsExpiringOn(date: Date): Promise<any[]> {
+    const startOfDay = new Date(date)
+    startOfDay.setHours(0, 0, 0, 0)
+
+    const endOfDay = new Date(date)
+    endOfDay.setHours(23, 59, 59, 999)
+
+    return await Item.findAll({
+      where: {
+        expiryDate: {
+          [Op.between]: [startOfDay, endOfDay],
+        },
+      },
+    })
   }
 
   private isExpired(item: Item): boolean {
