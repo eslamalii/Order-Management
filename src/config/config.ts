@@ -28,6 +28,15 @@ export const config = {
       Number(process.env.PASSWORD_RESET_EXPIRES_IN_HOURS) || 24,
   },
 
+  // SMTP Email Configuration
+  smtp: {
+    host: process.env.SMTP_HOST!,
+    port: Number(process.env.SMTP_PORT) || 587,
+    user: process.env.SMTP_USER!,
+    pass: process.env.SMTP_PASS!,
+    fromEmail: process.env.FROM_EMAIL!,
+  },
+
   // Security
   bcryptSaltRounds: Number(process.env.BCRYPT_SALT_ROUNDS) || 10,
 

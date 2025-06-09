@@ -7,6 +7,8 @@ import swaggerUi from 'swagger-ui-express'
 import { swaggerSpec } from './docs/swagger'
 import { config } from './config/config'
 import { setupContainer } from './config/container'
+import { CronService } from './services/cronService'
+import { TYPES } from './config/types'
 
 const app: Application = express()
 const PORT = config.port
@@ -38,10 +40,20 @@ app.get('/', (_req: Request, res: Response) => {
 app.use('/api/v1', createRoutes(container))
 app.use(errorHandler)
 ;(async () => {
-  await connectDB()
+  try {
+    await connectDB()
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server listening on http://localhost:${PORT}`)
-    console.log(`📚 API Docs: http://localhost:${PORT}/api-docs`)
-  })
+    // Initialize cron jobs after database connection
+    const cronService = container.get<CronService>(TYPES.CronService)
+    cronService.init()
+    console.log('✅ Cron jobs initialized')
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server listening on http://localhost:${PORT}`)
+      console.log(`📚 API Docs: http://localhost:${PORT}/api-docs`)
+    })
+  } catch (error) {
+    console.error('❌ Failed to start server:', error)
+    process.exit(1)
+  }
 })()

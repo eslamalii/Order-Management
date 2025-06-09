@@ -11,4 +11,6 @@ export const TYPES = {
   OrderController: Symbol.for('OrderController'),
   CommissionService: Symbol.for('CommissionService'),
   CommissionController: Symbol.for('CommissionController'),
+  CronService: Symbol.for('CronService'),
+  EmailService: Symbol.for('EmailService'),
 }
