@@ -80,12 +80,6 @@
 - `npm run build` - Build TypeScript to JavaScript
 - `npm start` - Start production server
 
-## Health Check
-
-- **Endpoint**: `GET /health`
-- **Response**: Returns application status, database connectivity, and system information
-- **Location**: `src/middleware/health/`
-
 ## Development Progress
 
 ### Assessment Requirements
@@ -216,46 +210,3 @@
 - [ ] **Swagger/OpenAPI Documentation**
 - [ ] **API Deployment** with public URL
 - [ ] **Interactive API Documentation** (Postman with environment variables)
-
-## 🔍 API Endpoints
-
-### Health
-
-- `GET /health` - Application health check ✅
-
-### Authentication
-
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/verify-email` - Email verification
-- `POST /api/auth/forgot-password` - Password reset request
-- `POST /api/auth/reset-password` - Password reset
-
-### Users
-
-- `GET /api/users` - Get all users (admin)
-- `GET /api/users/:id` - Get user by ID
-- `PUT /api/users/:id` - Update user
-- `DELETE /api/users/:id` - Delete user
-
-### Categories
-
-- `GET /api/categories` - Get all categories
-- `POST /api/categories` - Create category
-- `PUT /api/categories/:id` - Update category
-- `DELETE /api/categories/:id` - Delete category
-
-### Items
-
-- `GET /api/items` - Get all items
-- `POST /api/items` - Create item
-- `PUT /api/items/:id` - Update item
-- `DELETE /api/items/:id` - Delete item
-
-### Orders
-
-- `GET /api/orders` - Get user orders
-- `POST /api/orders` - Create order
-- `GET /api/orders/:id` - Get order details
-- `PUT /api/orders/:id` - Update order
-- `DELETE /api/orders/:id` - Cancel order
